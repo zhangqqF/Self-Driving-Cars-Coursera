@@ -10,7 +10,7 @@
 
 
 
-![image-20230316160355384](F:\carla\Self-Driving-Cars-Coursera\img\MPC_vehicleDynamic.png)
+![image-20230316160355384](./img\MPC_vehicleDynamic.png)
 
 ***v*<sub>f</sub>**   -- Velocity of front
 
