@@ -9,8 +9,9 @@
 ---
 
 
-
-![image-20230316160355384](./img/MPC_vehicleDynamic.png)
+<p align=center>
+<img src=./img/MPC_vehicleDynamic.png>
+</p>
 
 ***v*<sub>f</sub>**   -- Velocity of front
 
