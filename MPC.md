@@ -53,7 +53,7 @@ Reference the book ***Model Predictive Control fo the Self-Driving Cars***.
 
 Don't follow the derivation of the book *Model Predictive Control fo the Self-Driving Cars*, it's suck.
 
-The four wheels vehicle is simplify to the bycicle with two wheels, so:
+The four wheels vehicle is simplify to the bycicle with two wheels, so
 
 $$
 v_f\cos\delta=v_r
@@ -65,7 +65,7 @@ $$
 \omega=\dot\varphi=\frac{v_f\sin\delta}{L}
 $$
 
-Use $\frac{v_r}{\cos\delta}$ replace the $v_f$, so:
+Use $\frac{v_r}{\cos\delta}$ replace the $v_f$, so
 
 $$
 \omega=\frac{v_r\tan\delta}{L}
@@ -148,12 +148,10 @@ But this is a no-linear model, and we want a linear model similar to $\boldsymbo
 
 Taylor Expanssion at the $x_0$
 $$
-\color{gray}
 f(x)=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+R_n
 $$
 Linearization
 $$
-\color{gray}
 \dot{\xi}=f(\xi{_0}, u_0)+
 \frac{\partial f}{\partial \xi} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (\xi-\xi{_0})+
 \frac{\partial f}{\partial u} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (u-u_0)
