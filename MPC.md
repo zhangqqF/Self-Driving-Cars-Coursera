@@ -32,7 +32,7 @@ Reference the book ***Model Predictive Control fo the Self-Driving Cars***.
 <img src=./img/MPC_vehicleDynamic.png>
 </p>
 
-​			$v_f$   -- Velocity of front wheel
+​    		$v_f$   -- Velocity of front wheel
 
 ​			$v_r$   -- Velocity of rear wheel (vehicle velocity)
 
@@ -57,19 +57,19 @@ Don't follow the derivation of the book *Model Predictive Control fo the Self-Dr
 The four wheels vehicle is simplify to the bycicle with two wheels, so:
 
 $$
-v_fcos\delta=v_r
+v_fcos\delta=v_r \tag{4.1}
 $$
 
 and, $v_fsin\delta$ is velocity of the front wheel rotate about the rear wheel with the radius of $L$. So the angular velocity of the rear wheel is:
 
 $$
-\omega=\dot\varphi=\frac{v_fsin\delta}{L}
+\omega=\dot\varphi=\frac{v_fsin\delta}{L} \tag{4.2}
 $$
 
 Use $\frac{v_r}{cos\delta}$ replace the $v_f$, so:
 
 $$
-\omega=\frac{v_rtan\delta}{L}
+\omega=\frac{v_rtan\delta}{L} \tag{4.3}
 $$
 
 We can also have the kinemic model easily.
@@ -90,6 +90,7 @@ $$
 	sin\varphi \\
 	\frac{tan\delta}{L}
 \end{bmatrix} v_r
+\tag{4.4}
 $$
 
 ### Dynamic Model
