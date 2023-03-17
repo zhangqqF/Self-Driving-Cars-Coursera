@@ -13,6 +13,9 @@
 
 - [MPC](#mpc)
 	- [Chapter 4 Kinemic and Dynamic Model of the Vehicle](#chapter-4-kinemic-and-dynamic-model-of-the-vehicle)
+		- [4-1 Kinemic Model](#4-1-kinemic-model)
+		- [Dynamic Model](#dynamic-model)
+		- [Wheel Model](#wheel-model)
 	
 	
 
@@ -21,6 +24,8 @@
 Reference the book ***Model Predictive Control fo the Self-Driving Cars***.
 
 ## Chapter 4 Kinemic and Dynamic Model of the Vehicle
+
+### 4-1 Kinemic Model
 
 
 <p align=center>
@@ -74,18 +79,28 @@ $$
 	v_r \\
 	v_r \\
 	\omega
-\end{bmatrix}
-=
+\end{bmatrix}=
 \begin{bmatrix}
 	\dot X_r \\
 	\dot Y_r \\
 	\dot\varphi
-\end{bmatrix}
-=
+\end{bmatrix}=
 \begin{bmatrix}
 	cos\varphi \\
 	sin\varphi \\
 	\frac{tan\delta}{L}
 \end{bmatrix} v_r
 $$
+
+### Dynamic Model
+
+Ignored
+
+### Wheel Model
+
+Magic Formula comes from *Pacejka*, which commonly expression is:
+$$
+Y(x)=Dsin\{Carctan[Bx-E(Bx-arctan(Bx))]\}
+$$
+$B$, $C$, $D$ specified by the vertical loads and the camber angle of the wheel.
 
