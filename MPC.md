@@ -93,7 +93,7 @@ $$
 
 The formula can be simplified
 $$
-\boldsymbol{\dot\xi}=f(\boldsymbol{\xi}, \boldsymbol{u})
+
 $$
 
 
@@ -119,3 +119,50 @@ Where $Y$ is the output variable, can be longitudinal force $F_x$, side force $F
 **Question description:**
 
 A vehicle run from the original position, track the path of $y=2$ with a longitudinal velocity of 1 m/s in sample time of 50 ms and the total time of 20 s.
+
+
+
+Review the *Kinemic Model* before
+$$
+\begin{bmatrix}
+	v_r \\
+	v_r \\
+	\omega
+\end{bmatrix}=
+\begin{bmatrix}
+	\dot X_r \\
+	\dot Y_r \\
+	\dot\varphi
+\end{bmatrix}=
+\begin{bmatrix}
+	\cos\varphi \\
+	\sin\varphi \\
+	\frac{\tan\delta}{L}
+\end{bmatrix} v_r
+$$
+We can simplify to
+$$
+\boldsymbol{\dot\xi}=f(\boldsymbol{\xi}, \boldsymbol{u}) \tag{a}
+$$
+But this is a no-linear model, and we want a linear model similar to $\boldsymbol{\dot\xi}=\boldsymbol{A}\boldsymbol{\xi}+\boldsymbol{B}\boldsymbol{u}$, so we expanse it by *Taylor Expanssion* and take to only the first order.
+
+Taylor Expanssion at the $x_0$
+$$
+\color{gray}
+f(x)=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots+\frac{f^{(n)}(x_0)}{n!}(x-x_0)^n+R_n
+$$
+Linearization
+$$
+\color{gray}
+\dot{\xi}=f(\xi{_0}, u_0)+
+\frac{\partial f}{\partial \xi} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (\xi-\xi{_0})+
+\frac{\partial f}{\partial u} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (u-u_0)
+$$
+　　　　　　subtracted by *fromula (a)*
+$$
+(\dot\xi-\dot\xi_{0})+A(\xi)(\xi-\xi_{0})+B(u)(u-u_0)=0
+$$
+　　　　　　so we can write as the linear model
+$$
+\dot{\tilde{\xi}}=A(\xi)\tilde{\xi} + B(u)\tilde{u}
+$$
