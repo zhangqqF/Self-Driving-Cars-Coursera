@@ -91,11 +91,6 @@ $$
 \end{bmatrix} v_r
 $$
 
-The formula can be simplified
-$$
-
-$$
-
 
 ### 2-2 Dynamic Model
 
@@ -153,8 +148,8 @@ $$
 Linearization
 $$
 \dot{\xi}=f(\xi{_0}, u_0)+
-\frac{\partial f}{\partial \xi} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (\xi-\xi{_0})+
-\frac{\partial f}{\partial u} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (u-u_0)
+\frac{\partial f}{\partial \xi} \bigg|_{\begin{split}\xi&\doteq \xi_{0} \\ u&\doteq u_0 \end{split}} (\xi-\xi{_0})+
+\frac{\partial f}{\partial u} \bigg|_{\begin{split}\xi&\eql \xi_{0} \\ u&\doteq u_0 \end{split}} (u-u_0)
 $$
 　　　　　　subtracted by *fromula (a)*
 $$
