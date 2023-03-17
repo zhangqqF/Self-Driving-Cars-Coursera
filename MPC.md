@@ -32,7 +32,7 @@ Reference the book ***Model Predictive Control fo the Self-Driving Cars***.
 <img src=./img/MPC_vehicleDynamic.png>
 </p>
 
-​    		$v_f$   -- Velocity of front wheel
+　　　　　　$v_f$   -- Velocity of front wheel
 
 ​			$v_r$   -- Velocity of rear wheel (vehicle velocity)
 
