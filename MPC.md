@@ -3,19 +3,18 @@
 # MPC
 
 > zhangqq  
->
-> Mar-16, 2023
->
+> Mar-16, 2023  
 > Chongqing
 
 ---
 
 
 - [MPC](#mpc)
-	- [Chapter 4 Kinemic and Dynamic Model of the Vehicle](#chapter-4-kinemic-and-dynamic-model-of-the-vehicle)
-		- [4-1 Kinemic Model](#4-1-kinemic-model)
-		- [Dynamic Model](#dynamic-model)
-		- [Wheel Model](#wheel-model)
+	- [Chapter 2 Kinemic and Dynamic Model of the Vehicle](#chapter-2-kinemic-and-dynamic-model-of-the-vehicle)
+		- [2-1 Kinemic Model](#2-1-kinemic-model)
+		- [2-2 Dynamic Model](#2-2-dynamic-model)
+		- [2-3 Wheel Model](#2-3-wheel-model)
+	- [Linear MPC](#linear-mpc)
 	
 	
 
@@ -23,9 +22,9 @@
 
 Reference the book ***Model Predictive Control fo the Self-Driving Cars***.
 
-## Chapter 4 Kinemic and Dynamic Model of the Vehicle
+## Chapter 2 Kinemic and Dynamic Model of the Vehicle
 
-### 4-1 Kinemic Model
+### 2-1 Kinemic Model
 
 
 <p align=center>
@@ -92,15 +91,31 @@ $$
 \end{bmatrix} v_r
 $$
 
-### Dynamic Model
+The formula can be simplified
+$$
+\boldsymbol{\dot\xi}=f(\boldsymbol{\xi}, \boldsymbol{u})
+$$
+
+
+### 2-2 Dynamic Model
 
 Ignored
 
-### Wheel Model
+### 2-3 Wheel Model
 
-Magic Formula comes from *Pacejka*, which commonly expression is:
+Magic Formula comes from *Pacejka*, which general for pure slip is
 $$
-Y(x)=D\sin \{C\arctan {[Bx-E(Bx-\arctan(Bx))]} \}
+Y(x)=D\sin {C\arctan {[Bx-E(Bx-\arctan(Bx))]} }
 $$
-$B$, $C$, $D$ specified by the vertical loads and the camber angle of the wheel.
+　　　　　　where
+$$
+Y(x)=y(x)+S_v \\
+x=X+S_h
+$$
+Where $Y$ is the output variable, can be longitudinal force $F_x$, side force $F_y$, or alining moment $M_z$. $B$, $C$, $D$​ refers to stiffness, shape, peak and curvature factors respectively. $S_h$ and $S_v$ refers to horizontal and vertical shift respectively.
 
+## Linear MPC
+
+**Question description:**
+
+A vehicle run from the original position, track the path of $y=2$ with a longitudinal velocity of 1 m/s in sample time of 50 ms and the total time of 20 s.
