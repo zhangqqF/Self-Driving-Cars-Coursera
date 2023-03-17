@@ -34,21 +34,21 @@ Reference the book ***Model Predictive Control fo the Self-Driving Cars***.
 
 　　　　　　$v_f$   -- Velocity of front wheel
 
-​			$v_r$   -- Velocity of rear wheel (vehicle velocity)
+　　　　　　$v_r$   -- Velocity of rear wheel (vehicle velocity)
 
-​			$\delta$	 -- Rotate angle of front wheel (steering angle)
+　　　　　　$\delta$	 -- Rotate angle of front wheel (steering angle)
 
-​			$\varphi$	-- Rotate angle of rear wheel (vehicle body angle, hesding angle)
+　　　　　　$\varphi$	-- Rotate angle of rear wheel (vehicle body angle, hesding angle)
 
-​			$R$	-- Steering radius
+　　　　　　$R$	-- Steering radius
 
-​			$P$	-- Steering canter point
+　　　　　　$P$	-- Steering canter point
 
-​			$L$	-- Wheel base
+　　　　　　$L$	-- Wheel base
 
-​			$(X_f, Y_f)$   -- Displacement of the front wheel
+　　　　　　$(X_f, Y_f)$   -- Displacement of the front wheel
 
-​			$(X_r, Y_r)$   -- Displacement of the rear wheel (vehicle displacement)
+　　　　　　$(X_r, Y_r)$   -- Displacement of the rear wheel (vehicle displacement)
 
 
 
@@ -57,19 +57,19 @@ Don't follow the derivation of the book *Model Predictive Control fo the Self-Dr
 The four wheels vehicle is simplify to the bycicle with two wheels, so:
 
 $$
-v_fcos\delta=v_r
+v_f\cos\delta=v_r
 $$
 
-and, $v_fsin\delta$ is velocity of the front wheel rotate about the rear wheel with the radius of $L$. So the angular velocity of the rear wheel is:
+and, $v_f\sin\delta$ is velocity of the front wheel rotate about the rear wheel with the radius of $L$. So the angular velocity of the rear wheel is:
 
 $$
-\omega=\dot\varphi=\frac{v_fsin\delta}{L}
+\omega=\dot\varphi=\frac{v_f\sin\delta}{L}
 $$
 
-Use $\frac{v_r}{cos\delta}$ replace the $v_f$, so:
+Use $\frac{v_r}{\cos\delta}$ replace the $v_f$, so:
 
 $$
-\omega=\frac{v_rtan\delta}{L}
+\omega=\frac{v_r\tan\delta}{L}
 $$
 
 We can also have the kinemic model easily.
@@ -86,9 +86,9 @@ $$
 	\dot\varphi
 \end{bmatrix}=
 \begin{bmatrix}
-	cos\varphi \\
-	sin\varphi \\
-	\frac{tan\delta}{L}
+	\cos\varphi \\
+	\sin\varphi \\
+	\frac{\tan\delta}{L}
 \end{bmatrix} v_r
 $$
 
@@ -100,7 +100,7 @@ Ignored
 
 Magic Formula comes from *Pacejka*, which commonly expression is:
 $$
-Y(x)=Dsin\{{Carctan[Bx-E(Bx-arctan(Bx))]\}}
+Y(x)=D\sin \{C\arctan {[Bx-E(Bx-\arctan(Bx))]} \}
 $$
 $B$, $C$, $D$ specified by the vertical loads and the camber angle of the wheel.
 
