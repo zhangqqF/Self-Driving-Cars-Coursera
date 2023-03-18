@@ -104,8 +104,14 @@ Y(x)=D\sin {C\arctan {[Bx-E(Bx-\arctan(Bx))]} }
 $$
 　　　　　　where
 $$
-Y(x)=y(x)+S_v \\
-x=X+S_h
+\begin{equation}
+\left\{
+	\begin{array}{cc}	%cc refers to the align, c refers to center
+        Y(x)&=&y(x)+S_v \\
+        x&=&X+S_h
+    \end{array}
+\right.
+\end{equation}
 $$
 Where $Y$ is the output variable, can be longitudinal force $F_x$, side force $F_y$, or alining moment $M_z$. $B$, $C$, $D$​ refers to stiffness, shape, peak and curvature factors respectively. $S_h$ and $S_v$ refers to horizontal and vertical shift respectively.
 
@@ -147,11 +153,11 @@ f(x)=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots+\frac{
 $$
 Linearization
 $$
-\begin{equation}
 \dot{\xi}=f(\xi{_0}, u_0)+
-\frac{\partial f}{\partial \xi} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (\xi-\xi{_0})+
-\frac{\partial f}{\partial u} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (u-u_0)
-\end{equation}
+\frac{\partial f}{\partial \xi} \bigg|_{\begin{array}{cc}\xi=\xi_{0} \\ u=u_0 \end{array}} (\xi-\xi{_0})+
+\frac{\partial f}{\partial u} \bigg|_{\begin{array}{cc}\xi=\xi_{0} \\ u=u_0 \end{array}} (u-u_0)
+
+% github not support \begin{split}
 $$
 　　　　　　subtracted by *fromula (a)*
 $$
