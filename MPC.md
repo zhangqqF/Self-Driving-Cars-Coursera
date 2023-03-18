@@ -147,11 +147,11 @@ f(x)=f(x_0)+\frac{f'(x_0)}{1!}(x-x_0)+\frac{f''(x_0)}{2!}(x-x_0)^2+\cdots+\frac{
 $$
 Linearization
 $$
-\begin{align}
+\begin{equation}
 \dot{\xi}=f(\xi{_0}, u_0)+
 \frac{\partial f}{\partial \xi} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (\xi-\xi{_0})+
 \frac{\partial f}{\partial u} \bigg|_{\begin{split}\xi&=\xi_{0} \\ u&=u_0 \end{split}} (u-u_0)
-\end{align}
+\end{equation}
 $$
 　　　　　　subtracted by *fromula (a)*
 $$
