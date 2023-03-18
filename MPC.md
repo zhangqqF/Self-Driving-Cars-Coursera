@@ -100,7 +100,7 @@ Ignored
 
 Magic Formula comes from *Pacejka*, which general for pure slip is
 $$
-Y(x)=D\sin {C\arctan {[Bx-E(Bx-\arctan(Bx))]} }
+Y(x)=D\sin\{{C\arctan{[Bx-E(Bx-\arctan(Bx))]}}\}
 $$
 　　　　　　where
 $$
