@@ -105,12 +105,12 @@ $$
 　　　　　　where
 $$
 \begin{equation}
-\left\{
-	\begin{array}{cc}	%cc refers to the align, c refers to center
-        Y(x)&=&y(x)+S_v \\
-        x&=&X+S_h
-    \end{array}
-\right.
+    \left\{
+        \begin{array}{cc}	%cc refers to the align, c refers to center
+            Y(x)&=&y(x)+S_v \\
+            x&=&X+S_h
+        \end{array}
+    \right.
 \end{equation}
 $$
 Where $Y$ is the output variable, can be longitudinal force $F_x$, side force $F_y$, or alining moment $M_z$. $B$, $C$, $D$​ refers to stiffness, shape, peak and curvature factors respectively. $S_h$ and $S_v$ refers to horizontal and vertical shift respectively.
