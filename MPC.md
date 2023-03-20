@@ -100,7 +100,7 @@ Ignored
 
 Magic Formula comes from *Pacejka*, which general for pure slip is
 $$
-Y(x)=D\sin\{{C\arctan{[Bx-E(Bx-\arctan(Bx))]}}\}
+Y(x)=D\sin\{C\arctan{[Bx-E(Bx-\arctan(Bx))]}\}
 $$
 　　　　　　where
 $$
@@ -145,6 +145,10 @@ We can simplify to
 $$
 \boldsymbol{\dot\xi}=f(\boldsymbol{\xi}, \boldsymbol{u}) \tag{a}
 $$
+Let $\boldsymbol{\xi}=[\dot{X_r}, \dot{Y_r}, \dot{\varphi}]^T$ be outputs as the state quantity, and $\boldsymbol{u}=[v_r, \delta]^T$ be input as the control quantity.
+
+#### Linearization
+
 But this is a no-linear model, and we want a linear model similar to $\boldsymbol{\dot\xi}=\boldsymbol{A}\boldsymbol{\xi}+\boldsymbol{B}\boldsymbol{u}$, so we expanse it by *Taylor Expanssion* and take to only the first order.
 
 Taylor Expanssion at the $x_0$
@@ -159,11 +163,79 @@ $$
 
 % github not support \begin{split}
 $$
-　　　　　　subtracted by *fromula (a)*
+subtracted by *fromula (a)*
 $$
-(\dot\xi-\dot\xi_{0})+A(\xi)(\xi-\xi_{0})+B(u)(u-u_0)=0
+(\dot\xi-\dot\xi_{0})+A(\xi-\xi_{0})+B(u-u_0)=0
 $$
-　　　　　　so we can write as the linear model
 $$
-\dot{\tilde{\xi}}=A(\xi)\tilde{\xi} + B(u)\tilde{u}
+\left\{
+    \begin{aligned}
+        A = \frac{\partial{f}}{\partial{\xi}} \bigg{|} _ {\begin{array}{cc} \xi=\xi_0 \\ u=u_0 \end{array}} \\
+        B = \frac{\partial{f}}{\partial{u}} \bigg{|} _ {\begin{array}{cc} \xi=\xi_0 \\ u=u_0 \end{array}}
+    \end{aligned}
+\right.
+% \begin{array} will cause the partials become smaller.
+$$
+
+so we can write as the linear model
+$$
+\boldsymbol{\dot{\tilde{\xi}}=A\tilde{\xi} + B\tilde{u}}
+$$
+$\tilde{i}, i = [\dot\xi, \xi, u]$ refers to
+$$
+\left\{
+    \begin{array}{cc}
+        \dot{\tilde{\xi}} = \dot{\xi} - \dot{\xi_{0}} \\
+        \tilde{\xi} = \xi - \xi_{0} \\
+        \tilde{u} = u - u_{0}
+    \end{array}
+\right.
+$$
+Disddddd, forward-Euler
+$$
+\boldsymbol {\dot{\tilde\xi}} = \frac{\boldsymbol{\tilde\xi}_{(k+1)}-\boldsymbol{\tilde\xi}_{k}} {\boldsymbol{T}} \\
+
+\therefore \\
+\boldsymbol{\tilde\xi}_{(k+1)}-\boldsymbol{\tilde\xi}_{k} = \boldsymbol{TA\tilde{\xi}} + \boldsymbol{B\tilde{u}} \\
+
+\boldsymbol{\tilde\xi}_{(k+1)} = \boldsymbol{(TA+I)\tilde{\xi}}_k + \boldsymbol{B\tilde{u}} \\
+
+\boldsymbol{\tilde\xi}_{(k+1)} = \boldsymbol{J\tilde{\xi}}_k + \boldsymbol{B\tilde{u}} \\
+$$
+Look up the partial of the matrix
+$$
+\boldsymbol{J}(x_1, x_2, x_3) = 
+\begin{bmatrix}
+    \displaystyle\frac{\partial{f_1}}{\partial{{x_1}}} & \displaystyle\frac{\partial{f_1}}{\partial{{x_2}}} & \displaystyle\frac{\partial{f_1}}{\partial{{x_3}}} \\
+    \displaystyle\frac{\partial{f_2}}{\partial{{x_1}}} & \displaystyle\frac{\partial{f_2}}{\partial{{x_2}}} & \displaystyle\frac{\partial{f_2}}{\partial{{x_3}}} \\
+    \displaystyle\frac{\partial{f_3}}{\partial{{x_1}}} & \displaystyle\frac{\partial{f_3}}{\partial{{x_2}}} & \displaystyle\frac{\partial{f_3}}{\partial{{x_3}}} \\
+\end{bmatrix}
+
+% bmatrix [], pmatrix (), vmatrix {}
+$$
+s
+$$
+\boldsymbol J =
+\begin{bmatrix}
+    \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\dot{X}_r}} & \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\dot{Y}_r}} & \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\dot{\varphi}}} \\
+    \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\dot{X}_r}} & \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\dot{Y}_r}} & \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\dot{\varphi}}} \\
+    \displaystyle\frac{\partial{v_r\varphi}}{\partial{\dot{X}_r}} & \displaystyle\frac{\partial{v_r\varphi}} {\partial{\dot{Y}_r}} & \displaystyle\frac{\partial{v_r\varphi}}{\partial{\dot{\varphi}}} \\
+\end{bmatrix} T + \boldsymbol{I}
+=
+\begin{bmatrix}
+    0 & 0 & -Tv_r\sin{\varphi} \\
+    0 & 0 &  Tv_r\cos{\varphi} \\
+    0 & 0 &  Tv_r \\
+\end{bmatrix} + 
+\begin{bmatrix}
+    1 & 0 & 0 \\
+    0 & 1 & 0 \\
+    0 & 0 & 1 \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+    1 & 0 & -Tv_r\sin{\varphi} \\
+    0 & 1 & Tv_r\cos{\varphi} \\
+    0 & 0 & 1+Tv_r \\
+\end{bmatrix}
 $$
