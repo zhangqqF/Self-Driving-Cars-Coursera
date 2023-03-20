@@ -145,7 +145,7 @@ We can simplify to
 $$
 \boldsymbol{\dot\xi}=f(\boldsymbol{\xi}, \boldsymbol{u}) \tag{a}
 $$
-Let $\boldsymbol{\xi}=[\dot{X_r}, \dot{Y_r}, \dot{\varphi}]^T$ be outputs as the state quantity, and $\boldsymbol{u}=[v_r, \delta]^T$ be input as the control quantity.
+Let $\boldsymbol{\xi}=[X_r, Y_r, \varphi]^T$ be outputs as the state quantity, and $\boldsymbol{u}=[v_r, \delta]^T$ be input as the control quantity.
 
 #### Linearization
 
@@ -217,9 +217,9 @@ s
 $$
 \boldsymbol J =
 \begin{bmatrix}
-    \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\dot{X}_r}} & \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\dot{Y}_r}} & \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\dot{\varphi}}} \\
-    \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\dot{X}_r}} & \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\dot{Y}_r}} & \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\dot{\varphi}}} \\
-    \displaystyle\frac{\partial{v_r\varphi}}{\partial{\dot{X}_r}} & \displaystyle\frac{\partial{v_r\varphi}} {\partial{\dot{Y}_r}} & \displaystyle\frac{\partial{v_r\varphi}}{\partial{\dot{\varphi}}} \\
+    \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{X}_r} & \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{Y}_r} & \displaystyle\frac{\partial{v_r\cos{\varphi}}}{\partial{\varphi}} \\
+    \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{X}_r} & \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{Y}_r} & \displaystyle\frac{\partial{v_r\sin{\varphi}}}{\partial{\varphi}} \\
+    \displaystyle\frac{\partial{v_r\varphi}}{\partial{X}_r} & \displaystyle\frac{\partial{v_r\varphi}} {\partial{Y}_r} & \displaystyle\frac{\partial{v_r\varphi}}{\partial{\varphi}} \\
 \end{bmatrix} T + \boldsymbol{I}
 =
 \begin{bmatrix}
