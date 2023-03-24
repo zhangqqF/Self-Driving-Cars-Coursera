@@ -18,8 +18,9 @@
 		- [优化](#优化)
 - [\\](#)
 - [\&\\min\[(E^T + 2E\\theta U + (\\theta U)^T)(QE+Q\\theta U) + U^TRU\]\\](#minet--2etheta-u--theta-utqeqtheta-u--utru)
+	
 		- [反馈控制](#反馈控制)
-
+	
 	
 	
 
@@ -83,21 +84,21 @@ $$
 
 上述方程是非线性方程，需将其转为形似$\boldsymbol{{\dot\xi}={A}{\xi}+{B}{u}}$的线性方程，将式（2）在$(\xi_0, u_0)$处泰勒展开并忽略二阶及后面所有项数，得：
 $$
-\dot{\xi}=f(\xi{_0}, u_0)+
-\frac{\partial f}{\partial \xi} \bigg|_{\begin{array}{cc}\xi=\xi_{0} \\ u=u_0 \end{array}} (\xi-\xi{_0})+
-\frac{\partial f}{\partial u} \bigg|_{\begin{array}{cc}\xi=\xi_{0} \\ u=u_0 \end{array}} (u-u_0) \tag{3}
+\boldsymbol{\dot\xi}=f(\boldsymbol\xi{_0}, \boldsymbol u_0)+
+\frac{\partial \boldsymbol f}{\partial \boldsymbol\xi} \bigg|_{\begin{array}{cc}\boldsymbol{\xi=\xi}_{0} \\ \boldsymbol{u=u}_0 \end{array}} (\boldsymbol{\xi-\xi}_{0})+
+\frac{\partial \boldsymbol f}{\partial \boldsymbol u} \bigg|_{\begin{array}{cc}\boldsymbol{\xi=\xi}_{0} \\ \boldsymbol{u=u}_0 \end{array}} (\boldsymbol{u-u}_0) \tag{3}
 
 % github not support \begin{split}
 $$
-令$A=\frac{\partial{f}}{\partial\xi}\bigg{|}_{\begin{matrix}\xi=\xi_0 \\ u=u_0\end{matrix}}$，$B=\frac{\partial{f}}{\partial{u}}\bigg{|}_{\begin{matrix}\xi=\xi_0 \\ u=u_0\end{matrix}}$，再将式（2）减式（3），得：
+令$\boldsymbol A=\frac{\partial{\boldsymbol f}}{\partial\boldsymbol\xi}\bigg{|}_{\begin{matrix}\boldsymbol{\xi=\xi}_0 \\ \boldsymbol{u=u}_0\end{matrix}}$，$\boldsymbol B=\frac{\partial{\boldsymbol f}}{\partial\boldsymbol{u}}\bigg{|}_{\begin{matrix}\boldsymbol{\xi=\xi}_0 \\ \boldsymbol{u=u}_0\end{matrix}}$，再将式（2）减式（3），得：
 $$
-(\dot\xi-\dot\xi_{0})+A(\xi-\xi_{0})+B(u-u_0)=0
+(\boldsymbol{\dot\xi}-\boldsymbol{\dot\xi}_{0})+\boldsymbol A(\boldsymbol\xi-\boldsymbol\xi_{0})+\boldsymbol B(\boldsymbol u-\boldsymbol u_0)=0
 $$
-由上式可看出$(\dot\xi-\dot\xi_{0})$、$(\xi-\xi_{0})$、$(u-u_0)$分别为$\dot\xi$、$\xi$、$u$相对于$\dot\xi_0$、$\xi_0$、$u_0$的误差。实际上，$\dot\xi_0$、$\xi_0$、$u_0$就是参考点，MPC控制的目标就是向参考点对齐。于是就得到了误差的线性化模型：
+由上式可看出$(\boldsymbol{\dot\xi-\dot\xi}_{0})$、$(\boldsymbol{\xi-\xi}_{0})$、$(\boldsymbol{u-u}_0)$分别为$\boldsymbol{\dot\xi}$、$\boldsymbol\xi$、$\boldsymbol u$相对于$\boldsymbol{\dot\xi}_0$、$\boldsymbol\xi_0$、$\boldsymbol u_0$的误差。实际上，$\boldsymbol{\dot\xi}_0$、$\boldsymbol\xi_0$、$\boldsymbol u_0$就是参考点，MPC控制的目标就是向参考点对齐。于是就得到了误差的线性化模型：
 $$
 \boldsymbol{\dot{\tilde{\xi}}=A\tilde{\xi} + B\tilde{u}} \tag{4}
 $$
-$\tilde i$表示误差，其中$\tilde{\dot\xi}=\dot\xi-\dot\xi_0$、$\tilde\xi=\xi-\xi_0$、$\tilde u=u-u_0$。
+$\boldsymbol{\tilde i}$表示误差，其中$\boldsymbol{\tilde{\dot\xi}=\dot\xi-\dot\xi}_0$、$\boldsymbol{\tilde\xi=\xi-\xi}_0$、$\boldsymbol{\tilde u=u-u}_0$。
 
 ### 离散化
 
@@ -105,9 +106,123 @@ $\tilde i$表示误差，其中$\tilde{\dot\xi}=\dot\xi-\dot\xi_0$、$\tilde\xi=
 $$
 \boldsymbol{\tilde\xi}_{(k+1)} = {(T\boldsymbol{A}+\boldsymbol{I})\boldsymbol{\tilde{\xi}}}_k + T\boldsymbol{B\tilde{u}}
 $$
-令$\boldsymbol{C}=T\boldsymbol{A}+\boldsymbol{I}$，$\boldsymbol{D}=T\boldsymbol{B}$上式亦可写成：
+令$\boldsymbol{C}=T\boldsymbol{A}+\boldsymbol{I}$，$\boldsymbol{D}=T\boldsymbol{B}$，则：
 $$
 \boldsymbol{\tilde\xi}_{(k+1)} = {\boldsymbol{C}\boldsymbol{\tilde{\xi}}}_k + \boldsymbol{D\tilde{u}} \tag{5}
+$$
+
+代入运动方程得（$\boldsymbol{u}$没有参考值，无需减去$\boldsymbol u_0$）：
+$$
+\tilde{\boldsymbol\xi}_k=
+\begin{bmatrix}
+	X-X_0 \\
+	Y-Y_0 \\
+	\varphi-\varphi_0
+\end{bmatrix}
+,&
+\tilde{\boldsymbol u}
+=
+\begin{bmatrix}
+	v_r \\
+	\delta \\
+\end{bmatrix}
+$$
+
+$$
+\newcommand\c{\boldsymbol C}
+\newcommand\d{\boldsymbol D}
+\newcommand\t{\boldsymbol T}
+\newcommand\i{\boldsymbol I}
+\newcommand\x{\boldsymbol \xi}
+\newcommand\p{\partial}
+\newcommand\l{\bigg{|}_{\begin{array}{cc}\xi=\xi_0\\u=u_0\end{array}}}
+
+
+\begin{aligned}
+
+\c&=\frac{\p f}{\p\x}\l\t+\i
+
+=\frac
+{\p
+    \begin{bmatrix}
+        v_r\cos\varphi \\
+        v_r\sin\varphi \\
+        v_r\frac{\tan\delta}{L}
+    \end{bmatrix}
+}
+{\p
+    \begin{bmatrix}
+        X \\
+        Y \\
+        \varphi
+    \end{bmatrix}
+}\l\t+\i
+=
+\begin{bmatrix}
+    \frac{\p v_r\cos\varphi}{\p X} & \frac{\p v_r\cos\varphi}{\p Y} & \frac{\p v_r\cos\varphi}{\p\varphi} \\
+    \frac{\p v_r\sin\varphi}{\p X} & \frac{\p v_r\sin\varphi}{\p Y} & \frac{\p v_r\sin\varphi}{\p\varphi} \\
+    \frac{\p v_r\frac{\tan\delta}{L}}{\p X} & \frac{\p v_r\frac{\tan\delta}{L}}{\p Y} & \frac{\p v_r\frac{\tan\delta}{L}}{\p\varphi} \\
+\end{bmatrix}\l\t+\i
+=
+\begin{bmatrix}
+	0 & 0 & -v_r\sin\varphi \\
+	0 & 0 &  v_r\cos\varphi \\
+	0 & 0 & 0
+\end{bmatrix}\t+
+\begin{bmatrix}
+	1 & 0 & 0 \\
+	0 & 1 & 0 \\
+	0 & 0 & 1
+\end{bmatrix}
+
+\\
+&=
+\begin{bmatrix}
+	0 & 0 & -Tv_r\sin\varphi \\
+	0 & 0 &  Tv_r\cos\varphi \\
+	0 & 0 & 1
+\end{bmatrix}
+\end{aligned}
+$$
+
+$$
+\newcommand\c{\boldsymbol C}
+\newcommand\d{\boldsymbol D}
+\newcommand\t{\boldsymbol T}
+\newcommand\i{\boldsymbol I}
+\newcommand\u{\boldsymbol u}
+\newcommand\x{\boldsymbol \xi}
+\newcommand\p{\partial}
+\newcommand\l{\bigg{|}_{\begin{array}{cc}\xi=\xi_0\\u=u_0\end{array}}}
+
+\d=\frac{
+\p\begin{bmatrix}
+	v_r\cos\varphi \\
+	v_r\sin\varphi \\
+	v_r\frac{\tan\delta}{L}
+\end{bmatrix}}
+{\p\begin{bmatrix}
+	v_r \\
+	\delta
+\end{bmatrix}}T
+=
+\begin{bmatrix}
+	\frac{\p v_r\cos\varphi}{\p v_r} & \frac{\p v_r\cos\varphi}{\p\delta} \\
+	\frac{\p v_r\sin\varphi}{\p v_r} & \frac{\p v_r\sin\varphi}{\p\delta} \\
+	\frac{\p v_r\frac{\tan\delta}{L}}{\p v_r} & \frac{\p v_r\frac{\tan\delta}{L}}{\p\delta} \\
+\end{bmatrix}T
+=
+\begin{bmatrix}
+	\cos\varphi & 0 \\
+	\sin\varphi & 0 \\
+	\frac{\tan\delta}{L} & \frac{v_r}{L\cos^2\delta}
+\end{bmatrix}T
+=
+\begin{bmatrix}
+	T\cos\varphi & 0 \\
+	T\sin\varphi & 0 \\
+	T\frac{\tan\delta}{L} & T\frac{v_r}{L\cos^2\delta}
+\end{bmatrix}
 $$
 
 
@@ -200,7 +315,7 @@ $$
 	\boldsymbol{A}^0 & \cdots \\
 	\boldsymbol{A}^1 & \boldsymbol{A}^0 & \cdots \\
 	\vdots \\
-	\boldsymbol{A}^{Np-1} & \cdots & \boldsymbol{A}^{Np-Nc} & \boldsymbol{A}^0\\
+	\boldsymbol{A}^{Np-1} & \cdots & \boldsymbol{A}^{Np-Nc-1} & \boldsymbol{A}^0\\
 \end{bmatrix} \boldsymbol{B}
 ,&
 \boldsymbol{U}=
@@ -212,34 +327,59 @@ $$
 \end{bmatrix}
 $$
 
-可知$\boldsymbol{\theta}$为下三角矩阵。
+可知$\boldsymbol{\theta}$为下三角矩阵，且$\boldsymbol A$的次幂按列递增到$Np$、按行递减到$Np-Nc-1$。
 
 ### 优化
 
-目的是使模型以最小的控制变化量最快达到参考状态量。
+使模型以最小的控制变化量最快达到参考状态量。
 
 目标函数：
 $$
-\min[(\boldsymbol{Y-Y}_{ref})^T {\boldsymbol Q(\boldsymbol Y- \boldsymbol Y_{ref})} + 
-\boldsymbol{U}^T\boldsymbol{RU}]
+\newcommand\y{\boldsymbol Y}
+\newcommand\u{\boldsymbol U}
+\newcommand\r{\boldsymbol R}
+\newcommand\q{\boldsymbol Q}
+
+\min[(\y-\y_{ref})^T\q(\y-\y_{ref}) + \u^T\r\u] \\
 $$
  其中，$\boldsymbol Q$和$\boldsymbol R$分别为状态量和控制量的权重。
 
 令$\boldsymbol{E=\phi\xi}_{k}-\boldsymbol{\phi\xi}_{ref}=\boldsymbol{\phi\xi}_{k}-\boldsymbol{Y}_{ref}$，则得$\boldsymbol{Y-Y}_{ref}=\boldsymbol{E+\theta U}$，于是目标函数变为：
 $$
+\newcommand\E{\boldsymbol E}
+\newcommand\U{\boldsymbol U}
+\newcommand\R{\boldsymbol R}
+\newcommand\Q{\boldsymbol Q}
+\newcommand\th{\boldsymbol\theta}
+
 \begin{aligned}
 
 &\min[(\boldsymbol{E+\theta U})^T \boldsymbol{Q} (\boldsymbol{E+\theta U}) + 
 \boldsymbol{U}^T\boldsymbol{RU}] \\
 \\
-=
-&\min[(E^T + 2E\theta U + (\theta U)^T)(QE+Q\theta U) + U^TRU]\\
-=
-&\min[]\\
+=&\min[(\E^T + (\th\U)^T)(\Q\E+\Q\th\U) + \U^T\R\U] \\
+=&\min[{\color{silver}\bcancel{\E^T\Q\E}} + {\color[rgb]{0.2, 0.5, 0.8}\E^T\Q(\th\U) + (\th\U)^T\Q\E} + (\th\U)^T\Q(\th\U) + \U^T\R\U] \\
+=&\min[{\color[rgb]{0.2, 0.5, 0.8}2\E^T\Q(\th\U)} + (\th\U)^T\Q(\th\U) + \U^T\R\U]\\
+=&\min[{\color[rgb]{0.2, 0.5, 0.8}2\E^T\Q(\th\U)} + \U^T\th^T\Q\th\U + \U^T\R\U]\\
+=&\min[{\color[rgb]{0.2, 0.5, 0.8}2\E^T\Q(\th\U)} + \U^T(\th^T\Q\th + \R)\U]\\
+
 
 \end{aligned}
 $$
-![image-20230322173535070](F:\carla\New folder (2)\img\00)
+不计与$\boldsymbol U$没有关系的常数项$\boldsymbol E^T \boldsymbol{QE}$。推导过程用到矩阵转置运算法则：$\boldsymbol{(A+B)}^T=\boldsymbol{A}^T+\boldsymbol{B}^T$，$\boldsymbol{A}^T\boldsymbol{B}=\boldsymbol{B}^T\boldsymbol{A}$，$\boldsymbol{(AB)}^T=\boldsymbol{B}^T\boldsymbol{A}^T$。
+
+即得到标准形式：
+$$
+\newcommand\j{\boldsymbol J}
+\newcommand\x{\boldsymbol X}
+\newcommand\h{\boldsymbol H}
+
+\min\j=\frac{1}{2}\x^T\h\x + f^T\x
+$$
+
 
 ### 反馈控制
 
+[底盘控制交流群](https://www.bilibili.com/video/BV1Pv4y127Vc/?spm_id_from=333.788&vd_source=31c586dfbb435719033978621d59898c)
+
+[Ally](https://www.bilibili.com/video/BV1pV411n7uN/?spm_id_from=333.999.0.0&vd_source=31c586dfbb435719033978621d59898c)修改龚的代码，有不等式约束
