@@ -386,8 +386,23 @@ $$
 \newcommand \ph{\boldsymbol \phi}
 \newcommand \xi{\boldsymbol \xi}
 
+\begin{aligned}
+\h=2(\th^T\q\th+\r), f^T=2\e^T\q\th=2[\ph(\xi_k - \xi_{ref})]^T\q\th
+\end{aligned}
+$$
 
-\h=2(\th^T\q\th+\r), f^T=2\e^T\q\th=2[\ph(\xi_k - \xi_{ref})]^T\q\th
+$$
+\newcommand \j {\boldsymbol J}
+\newcommand \h {\boldsymbol H}
+\newcommand \e {\boldsymbol E}
+\newcommand \q {\boldsymbol Q}
+\newcommand \r {\boldsymbol R}
+\newcommand \th {\boldsymbol \theta}
+\newcommand \ph {\boldsymbol \phi}
+
+\begin{matrix}
+\h=2(\th^T\q\th+\r),& f^T=2\e^T\q\th=2\ph(\tilde{\xi}_k-\tilde\xi_{ref})\q\th
+\end{matrix}
 $$
 
 

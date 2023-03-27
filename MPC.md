@@ -239,3 +239,10 @@ $$
     0 & 0 & 1+Tv_r \\
 \end{bmatrix}
 $$
+
+
+$$
+\newcommand\U{\boldsymbol U}
+
+U R
+$$

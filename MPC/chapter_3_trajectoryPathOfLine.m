@@ -5,6 +5,7 @@
 
 clc;
 clear all;
+close all;
 
 
 % 
@@ -93,8 +94,8 @@ for i=1:1:Nr
            end
         end
     end
-    A=cell2mat(A_cell)
-    B=cell2mat(B_cell)
+    A=cell2mat(A_cell);
+    B=cell2mat(B_cell);
     
     return
     

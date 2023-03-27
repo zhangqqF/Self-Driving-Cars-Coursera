@@ -84,61 +84,65 @@ for i = 1:1:Nr
     THETA = cell2mat(THETA_cell);
     
     H = 2*(THETA'*Q*THETA+R);
-    f = 2*THETA'*Q*PHI*ksai_piao(i,:)';
+    f = 2*THETA'*Q*PHI*ksai_piao(i,:)';              % f^T矩阵
     A_cons = [];
     b_cons = [];
-    lb = [-1;-1];
-    ub = [1;1];
-    tic
-    [X,fval(i,1),exitflag(i,1),output(i,1)]=quadprog(H,f,A_cons,b_cons,[],[],lb,ub);
-    toc
-    X_PIAO(i,:) = (PHI*ksai_piao(i,:)'+THETA*X)';
+    lb = [-1; -1];                                   % 控制量下界
+    ub = [1; 1];                                     % 控制量上界
+    tic                                              % 开始计时
+    [X, fval(i,1), exitflag(i,1), output(i,1)] = quadprog(H,f,A_cons,b_cons,[],[],lb,ub);
+    % quadprog
+    % A*X <= b          不等式约束
+    % Aeq*X = beq       没有不等式约束，则Aeq和beq均为[]
+    % lb <= X <= up     上下界约束
+    toc                                              % 结束计时
+    X_PIAO(i, :) = (PHI*ksai_piao(i, :)' + THETA*X)';
     if i+j < Nr
          for j = 1:1:Tsim
-             XXX(i,1+3*(j-1)) = X_PIAO(i,1+3*(j-1))+ksai(i+j,1);
-             XXX(i,2+3*(j-1)) = X_PIAO(i,2+3*(j-1))+ksai(i+j,2);
-             XXX(i,3+3*(j-1)) = X_PIAO(i,3+3*(j-1))+ksai(i+j,3);
+             XXX(i, 1+3*(j-1)) = X_PIAO(i, 1+3*(j-1)) + ksai(i+j, 1);
+             XXX(i, 2+3*(j-1)) = X_PIAO(i, 2+3*(j-1)) + ksai(i+j, 2);
+             XXX(i, 3+3*(j-1)) = X_PIAO(i, 3+3*(j-1)) + ksai(i+j, 3);
          end
     else
-         for j = 1:1:Tsim
-             XXX(i,1+3*(j-1)) = X_PIAO(i,1+3*(j-1))+ksai(Nr,1);
-             XXX(i,2+3*(j-1)) = X_PIAO(i,2+3*(j-1))+ksai(Nr,2);
-             XXX(i,3+3*(j-1)) = X_PIAO(i,3+3*(j-1))+ksai(Nr,3);
+         for j = 1:1:Tsim 
+             XXX(i, 1+3*(j-1)) = X_PIAO(i, 1+3*(j-1))+ksai(Nr, 1);
+             XXX(i, 2+3*(j-1)) = X_PIAO(i, 2+3*(j-1))+ksai(Nr, 2);
+             XXX(i, 3+3*(j-1)) = X_PIAO(i, 3+3*(j-1))+ksai(Nr, 3);
          end
     end
-    u_piao(i,1) = X(1,1);
-    u_piao(i,2) = X(2,1);
+    u_piao(i, 1) = X(1, 1);
+    u_piao(i, 2) = X(2, 1);
     Tvec = [0:0.05:4];
     X00 = ksai_real(i,:);
-    vd11 = v+u_piao(i,1);
-    vd22 = yaw+u_piao(i,2);
+    vd11 = v + u_piao(i,1);
+    vd22 = yaw + u_piao(i,2);
     XOUT = dsolve('Dx-vd11*cos(z)=0','Dy-vd11*sin(z)=0','Dz-vd22=0','x(0)=X00(1)','y(0)=X00(2)','z(0)=X00(3)');
-     t = T; 
-     ksai_real(i+1,1) = eval(XOUT.x);
-     ksai_real(i+1,2) = eval(XOUT.y);
-     ksai_real(i+1,3) = eval(XOUT.z);
-     if(i < Nr)
-         ksai_piao(i+1,:) = ksai_real(i+1,:) - ksai(i+1,:);
-     end
-    u_real(i,1) = v+u_piao(i,1);
-    u_real(i,2) = yaw+u_piao(i,2);
+    t = T; 
+    ksai_real(i+1, 1) = eval(XOUT.x);
+    ksai_real(i+1, 2) = eval(XOUT.y);
+    ksai_real(i+1, 3) = eval(XOUT.z);
+    if(i < Nr)
+        ksai_piao(i+1,:) = ksai_real(i+1,:) - ksai(i+1,:);
+    end
+    u_real(i, 1) = v + u_piao(i, 1);
+    u_real(i, 2) = yaw + u_piao(i, 2);
     
     figure(1);
-    plot(ksai(1:Nr,1), ksai(1:Nr,2));
+    plot(ksai(1:Nr, 1), ksai(1:Nr, 2));
     hold on;
-    plot(ksai_real(i,1), ksai_real(i,2),'r*');
+    plot(ksai_real(i,1), ksai_real(i,2),'bo');
     title('跟踪结果对比');
     xlabel('横向位置X');
     axis([-1 5 -1 3]);
     ylabel('纵向位置Y');
     hold on;
     for k = 1:1:Tsim
-         X(i, k+1) = XXX(i, 1+3*(k-1));
-         Y(i, k+1) = XXX(i, 2+3*(k-1));
+        X(i, k+1) = XXX(i, 1+3*(k-1));
+        Y(i, k+1) = XXX(i, 2+3*(k-1));
     end
     X(i, 1) = ksai_real(i, 1);
     Y(i, 1) = ksai_real(i, 2);
-    plot(X(i,:),Y(i,:),'y')
+    plot(X(i,:), Y(i,:),'y')
     hold on;
     
 end
