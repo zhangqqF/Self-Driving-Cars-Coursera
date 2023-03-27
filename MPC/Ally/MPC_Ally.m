@@ -15,7 +15,7 @@ Kp = 1;
 dt = 0.1;                               % 时间步长，即采样时间
 L = 2.9;                                % 轴距
 max_steer = 60*pi/180;                  % in rad
-target_v = 30/3.6;
+target_v = 30/3.6
 
 
 % 参考轨迹
@@ -66,7 +66,7 @@ pos_actual = [x, y];                                    % 存放每一步的实�
 
 while ind < length(refPos_x)
     % 调用MPC控制器
-    [delta, v, ind, U] = mpc_control(x, y, yaw, refPos_x, refPos_y, refPos_yaw, refPos_k, dt, L, U, target_v);
+    [delta, v, ind, U] = mpc_control(x, y, yaw, refPos_x, refPos_y, refPos_yaw, refPos_k, dt, L, U, target_v)
 
     % 误差太大，退出程序
     if abs(e) > 3
@@ -74,3 +74,7 @@ while ind < length(refPos_x)
         break
     end
 end
+
+
+% 速度P控制器
+a = Kp*(target_v-v);

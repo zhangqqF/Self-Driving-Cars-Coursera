@@ -377,6 +377,20 @@ $$
 \min\j=\frac{1}{2}\x^T\h\x + f^T\x
 $$
 
+$$
+\newcommand \h{\boldsymbol H}
+\newcommand \q{\boldsymbol Q}
+\newcommand \r{\boldsymbol R}
+\newcommand \e{\boldsymbol E}
+\newcommand \th{\boldsymbol \theta}
+\newcommand \ph{\boldsymbol \phi}
+\newcommand \xi{\boldsymbol \xi}
+
+
+\h=2(\th^T\q\th+\r), f^T=2\e^T\q\th=2[\ph(\xi_k - \xi_{ref})]^T\q\th
+$$
+
+
 
 ### 反馈控制
 
