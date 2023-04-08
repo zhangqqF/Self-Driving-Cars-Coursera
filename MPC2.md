@@ -16,8 +16,6 @@
 		- [离散化](#离散化)
 		- [预测](#预测)
 		- [优化](#优化)
-- [\\](#)
-- [\&\\min\[(E^T + 2E\\theta U + (\\theta U)^T)(QE+Q\\theta U) + U^TRU\]\\](#minet--2etheta-u--theta-utqeqtheta-u--utru)
 	
 		- [反馈控制](#反馈控制)
 	
@@ -51,7 +49,7 @@
 
 
 
-将4轮模型简化为两轮来分析。
+将四轮模型简化为两轮来分析。
 
 由几何关系可得到：
 $$
@@ -119,7 +117,7 @@ $$
 	Y-Y_0 \\
 	\varphi-\varphi_0
 \end{bmatrix}
-,&
+,\quad
 \tilde{\boldsymbol u}
 =
 \begin{bmatrix}
@@ -301,7 +299,7 @@ $$
 	\vdots \\
 	\boldsymbol{\tilde\xi}_{(k+Np)} \\
 \end{bmatrix}
-,&
+,\quad
 \boldsymbol{\phi}=
 \begin{bmatrix}
 	\boldsymbol{A}^1 \\
@@ -309,7 +307,7 @@ $$
 	\vdots \\
 	\boldsymbol{A}^{Np} \\
 \end{bmatrix}
-,&
+,\quad
 \boldsymbol{\theta}=
 \begin{bmatrix}
 	\boldsymbol{A}^0 & \cdots \\
@@ -317,7 +315,7 @@ $$
 	\vdots \\
 	\boldsymbol{A}^{Np-1} & \cdots & \boldsymbol{A}^{Np-Nc-1} & \boldsymbol{A}^0\\
 \end{bmatrix} \boldsymbol{B}
-,&
+,\quad
 \boldsymbol{U}=
 \begin{bmatrix}
 	\boldsymbol{u}_{k} \\
@@ -378,20 +376,6 @@ $$
 $$
 
 $$
-\newcommand \h{\boldsymbol H}
-\newcommand \q{\boldsymbol Q}
-\newcommand \r{\boldsymbol R}
-\newcommand \e{\boldsymbol E}
-\newcommand \th{\boldsymbol \theta}
-\newcommand \ph{\boldsymbol \phi}
-\newcommand \xi{\boldsymbol \xi}
-
-\begin{aligned}
-\h=2(\th^T\q\th+\r), f^T=2\e^T\q\th=2[\ph(\xi_k - \xi_{ref})]^T\q\th
-\end{aligned}
-$$
-
-$$
 \newcommand \j {\boldsymbol J}
 \newcommand \h {\boldsymbol H}
 \newcommand \e {\boldsymbol E}
@@ -400,9 +384,12 @@ $$
 \newcommand \th {\boldsymbol \theta}
 \newcommand \ph {\boldsymbol \phi}
 
-\begin{matrix}
-\h=2(\th^T\q\th+\r),& f^T=2\e^T\q\th=2\ph(\tilde{\xi}_k-\tilde\xi_{ref})\q\th
-\end{matrix}
+\left\{
+\begin{array}{ll}
+\h=2(\th^T\q\th+\r) \\
+f^T=2\e^T\q\th=2\ph(\tilde{\xi}_k-\tilde\xi_{ref})\q\th	
+\end{array}
+\right.
 $$
 
 
